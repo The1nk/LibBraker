@@ -21,5 +21,7 @@ namespace LibBraker
         public long InputFileSizeBytes { get; set; }
         public long OutputFileSizeBytes { get; set; }
         public Task Task { get; set; }
+        public DateTime EncodeStart { get; set; }
+        public DateTime EncodeEnd { get; set; }
     }
 }

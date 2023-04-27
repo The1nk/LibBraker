@@ -283,9 +283,11 @@ namespace LibBraker
                     _handBrakeProcess.ErrorDataReceived += (sender, e) => HandleHandBrakeOutput(e.Data);
                     _handBrakeProcess.OutputDataReceived += (sender, e) => HandleHandBrakeOutput(e.Data);
                     _handBrakeProcess.Start();
+                    jobInner.EncodeStart = DateTime.Now;
                     _handBrakeProcess.BeginErrorReadLine();
                     _handBrakeProcess.BeginOutputReadLine();
                     await _handBrakeProcess.WaitForExitAsync();
+                    jobInner.EncodeEnd = DateTime.Now;
                 }
                 catch (Exception ex)
                 {
@@ -359,7 +361,13 @@ namespace LibBraker
 
                 // Done
                 jobInner.OutputFileSizeBytes = new FileInfo(jobInner.OutputFilename).Length;
-                Log.Information("File '{0}' complete! Output size {1:#,##0} bytes. That's a {2}% reduction!", jobInner.InputFilename, jobInner.InputFileSizeBytes, 1-(jobInner.OutputFileSizeBytes / jobInner.InputFileSizeBytes));
+                Log.Information(
+                    "Stats:\r\nFile:\t{0}\r\n--\r\nIn:\t{1:#,##0} bytes\r\nOut:\t{2:#,##0} bytes\r\nStart:\t{3:O}\r\nEnd:\t{4:O}\r\n--\r\nSaved:\t{5:#,##0} bytes ({6:00.00%})\r\nTook:\t{7:T}",
+                    System.IO.Path.GetFileName(jobInner.InputFilename), jobInner.InputFileSizeBytes,
+                    jobInner.OutputFileSizeBytes, jobInner.EncodeStart, jobInner.EncodeEnd,
+                    jobInner.InputFileSizeBytes - jobInner.OutputFileSizeBytes,
+                    1 - jobInner.OutputFileSizeBytes / (decimal)jobInner.InputFileSizeBytes,
+                    jobInner.EncodeEnd - jobInner.EncodeStart);
                 jobInner.State = Job.JOB_STATE.Completed;
             });
 
