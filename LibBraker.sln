@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibBraker", "LibBraker\LibBraker.csproj", "{456B29DA-1E88-4C09-A9EB-6E6BB8C12D99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{456B29DA-1E88-4C09-A9EB-6E6BB8C12D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456B29DA-1E88-4C09-A9EB-6E6BB8C12D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456B29DA-1E88-4C09-A9EB-6E6BB8C12D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456B29DA-1E88-4C09-A9EB-6E6BB8C12D99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB6B2E90-B9A8-4945-95D7-C58C9E5791CC}
+	EndGlobalSection
+EndGlobal

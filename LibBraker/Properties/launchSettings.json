@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "LibBraker": {
+      "commandName": "Project",
+      "commandLineArgs": "-Li .\\t\\ -Lo 999999999 -M 5 -A -x ultrafast -x2 auto -x26 zerolatency -h 1.1", // big and fast
+      //"commandLineArgs": "-Li .\\t\\ -Lo 999999999 -M 5 -A -x placebo -x2 high -x26 film -h 6.2" // smol and slow
+    }
+  }
+}
