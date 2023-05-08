@@ -78,10 +78,36 @@ public static class ExclusionEngine
         var removed = 0;
         lock (_history)
         {
-            removed = _history.HistoryItems.RemoveAll(h =>
+            var toRemove = _history.HistoryItems.Where(h =>
                 files.All(f =>
                     !(f.InputFilename.Equals(h.Filename, StringComparison.CurrentCultureIgnoreCase) &&
-                      f.InputFileSizeBytes == h.FileSize)));
+                      f.InputFileSizeBytes == h.FileSize))).ToList();
+
+            var idx = 0;
+            var max = toRemove.Count;
+            while (idx < max)
+            {
+                try
+                {
+                    if (File.Exists(toRemove[idx].Filename))
+                    {
+                        if (new FileInfo(toRemove[idx].Filename).Length == toRemove[idx].FileSize) continue;
+
+                        toRemove.RemoveAt(idx);
+                        max--;
+                    }
+                    else
+                        idx++;
+                    
+                }
+                catch
+                {
+                    idx++;
+                }
+            }
+
+            removed += toRemove.Count;
+            toRemove.ForEach(h => _history.HistoryItems.Remove(h));
         }
         
         SaveHistory();
