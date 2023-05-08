@@ -91,7 +91,11 @@ public static class ExclusionEngine
                 {
                     if (File.Exists(toRemove[idx].Filename))
                     {
-                        if (new FileInfo(toRemove[idx].Filename).Length == toRemove[idx].FileSize) continue;
+                        if (new FileInfo(toRemove[idx].Filename).Length == toRemove[idx].FileSize)
+                        {
+                            idx++;
+                            continue;
+                        }
 
                         toRemove.RemoveAt(idx);
                         max--;
