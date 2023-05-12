@@ -14,8 +14,8 @@ namespace LibBraker
             Log.Information("Finding files to be re-encoded..");
 
             var args = Args.GetArgs();
-            if (args.LibraryPath == null)
-                throw new Exception("Library path is null!");
+            if (args.LibraryPath == null || !args.LibraryPath.Any())
+                throw new Exception("Library path missing!");
 
             var eo = new EnumerationOptions
             {
@@ -25,14 +25,19 @@ namespace LibBraker
                 RecurseSubdirectories = args.RecurseThroughSubdirectories
             };
 
-            var files = System.IO.Directory.GetFiles(args.LibraryPath, "*", eo)
-                .Select(f => new Job()
-                {
-                    InputFilename = f, InputFileSizeBytes = new FileInfo(f!).Length, State = Job.JOB_STATE.Waiting,
-                    OutputFilename = Path.Combine(Path.GetDirectoryName(f)!,
-                        Path.GetFileNameWithoutExtension(f) + ".mp4")
-                })
-                .ToList();
+            List<Job> files = new();
+            foreach (var libPath in args.LibraryPath)
+            {
+                files.AddRange(System.IO.Directory.GetFiles(libPath, "*", eo)
+                    .Select(f => new Job()
+                    {
+                        InputFilename = f, InputFileSizeBytes = new FileInfo(f!).Length, State = Job.JOB_STATE.Waiting,
+                        OutputFilename = Path.Combine(Path.GetDirectoryName(f)!,
+                            Path.GetFileNameWithoutExtension(f) + ".mp4")
+                    })
+                    .ToList());
+            }
+            
 
             files = ExclusionEngine.RemoveExcludedFiles(files);
 

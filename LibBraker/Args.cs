@@ -30,9 +30,8 @@ namespace LibBraker
         public string? LogFileFilename { get; set; }
 
         [ArgRequired(PromptIfMissing = false)]
-        [ArgExistingDirectory]
-        [ArgDescription("Root of library path, or directory to where video files are stored")]
-        public string? LibraryPath { get; set; }
+        [ArgDescription("Library paths to search for files")]
+        public List<string>? LibraryPath { get; set; }
 
         [ArgDefaultValue(false)]
         [ArgDescription("Overwrite the original file if necessary")]
