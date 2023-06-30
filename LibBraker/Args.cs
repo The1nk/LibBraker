@@ -261,7 +261,7 @@ namespace LibBraker
                     };
 
                     psi.Arguments +=
-                        $"-i \"{job.CacheFilename}\" -o \"{job.EncodeFilename}\" -O -f mp4 -O --decomb --modulus 16 -e x264 -q 32 --vfr -E lame -6 dpl2 -R Auto -B 48 -D 0 --all-audio --all-subtitles --gain 0 --audio-fallback ffac3 --x264-preset=\"{GetArgs().x264Preset}\" --x264-profile=\"{GetArgs().x264Profile}\" --x264-tune=\"{GetArgs().x264Tune}\" --h264-level=\"{GetArgs().h264Level}\"";
+                        $"-i \"{job.CacheFilename}\" -o \"{job.EncodeFilename}\" -O -f mp4 -O --decomb --modulus 16 -e x264 -q 32 --vfr -E ac3 -6 ac3 -R Auto -B 48 -D 1 --all-audio --all-subtitles --gain 0 --audio-fallback ffac3 --x264-preset=\"{GetArgs().x264Preset}\" --x264-profile=\"{GetArgs().x264Profile}\" --x264-tune=\"{GetArgs().x264Tune}\" --h264-level=\"{GetArgs().h264Level}\"";
                     Log.Information("Running with arguments: {0}", psi.Arguments);
                     psi.CreateNoWindow = true;
                 }
